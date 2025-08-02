@@ -3,19 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Digital Storage Units Converter</title>
+    <title data-i18n="title">Digital Storage Units Converter</title>
     <link rel="icon" type="image/png" href="logo.png">
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Noto+Sans+Arabic:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-     <script src="scrapt.js"></script>
+    <script src="scrapt.js" defer></script>
 </head>
 <body>
     <header class="main-header">
         <div class="logo-container">
             <div class="logo">
                 <i class="fas fa-hdd logo-icon"></i>
-                <h1>Digital Storage Converter</h1>
+                <h1 data-i18n="header-title">Digital Storage Converter</h1>
+            </div>
+            <div class="language-toggle">
+                <button id="lang-toggle" data-i18n="lang-toggle">العربية</button>
             </div>
         </div>
         <div class="menu-toggle" id="menu-toggle">
@@ -23,45 +26,44 @@
             <span></span>
             <span></span>
         </div>
-        
         <nav class="nav-menu" id="nav-menu">
             <ul>
-                <li><a href="#hero">Home</a></li>
-                <li><a href="#features">Features</a></li>
-                <li><a href="#converter">Converter</a></li>
-                <li><a href="#vision-mission">Vision & Mission</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#hero" data-i18n="nav-home">Home</a></li>
+                <li><a href="#features" data-i18n="nav-features">Features</a></li>
+                <li><a href="#converter" data-i18n="nav-converter">Converter</a></li>
+                <li><a href="#vision-mission" data-i18n="nav-vision-mission">Vision & Mission</a></li>
+                <li><a href="#about" data-i18n="nav-about">About</a></li>
+                <li><a href="#contact" data-i18n="nav-contact">Contact</a></li>
             </ul>
         </nav>  
     </header>
 
     <section id="hero" class="hero">
         <div class="hero-content">
-            <h2>Digital Storage Units Converter</h2>
-            <p>Quick and accurate digital storage unit conversions</p>
-            <a href="#converter" class="cta-button">Start Converting Now</a>
+            <h2 data-i18n="hero-title">Digital Storage Units Converter</h2>
+            <p data-i18n="hero-subtitle">Quick and accurate digital storage unit conversions</p>
+            <a href="#converter" class="cta-button" data-i18n="hero-cta">Start Converting Now</a>
         </div>
     </section>
 
     <section id="features" class="features">
         <div class="container">
-            <h2 class="section-title">Converter Features</h2>
+            <h2 class="section-title" data-i18n="features-title">Converter Features</h2>
             <div class="features-grid">
                 <div class="feature-card">
                     <i class="fas fa-bolt"></i>
-                    <h3>Fast Conversion</h3>
-                    <p>Instant conversion for all storage units</p>
+                    <h3 data-i18n="feature-fast-title">Fast Conversion</h3>
+                    <p data-i18n="feature-fast-desc">Instant conversion for all storage units</p>
                 </div>
                 <div class="feature-card">
                     <i class="fas fa-check-circle"></i>
-                    <h3>High Accuracy</h3>
-                    <p>Precise and reliable results</p>
+                    <h3 data-i18n="feature-accuracy-title">High Accuracy</h3>
+                    <p data-i18n="feature-accuracy-desc">Precise and reliable results</p>
                 </div>
                 <div class="feature-card">
                     <i class="fas fa-mobile-alt"></i>
-                    <h3>Responsive Design</h3>
-                    <p>Works on all devices</p>
+                    <h3 data-i18n="feature-responsive-title">Responsive Design</h3>
+                    <p data-i18n="feature-responsive-desc">Works on all devices</p>
                 </div>
             </div>
         </div>
@@ -69,48 +71,49 @@
 
     <section id="converter" class="converter-section">
         <div class="container">
-            <h2 class="section-title">Converter</h2>
+            <h2 class="section-title" data-i18n="converter-title">Converter</h2>
             <div class="converter-container">
-                <a href="converter.html" class="converter-button">Open Converter</a>
+                <a href="converter.html" class="converter-button" data-i18n="converter-button">Open Converter</a>
             </div>
         </div>
     </section>
     <section id="vision-mission" class="info-section">
         <div class="info-grid">
             <div class="info-card">
-                <h2><i class="fas fa-eye"></i> Vision</h2>
-                <p>To make geometry easy and accessible for everyone through interactive calculations.</p>
+                <h2><i class="fas fa-eye"></i> <span data-i18n="vision-title">Vision</span></h2>
+                <p data-i18n="vision-desc">To make digital storage conversions easy and accessible for everyone.</p>
             </div>
             <div class="info-card">
-                <h2><i class="fas fa-flag"></i> Mission</h2>
-                <p>Provide a user-friendly platform for calculating areas, perimeters, and volumes of common geometric shapes.</p>
+                <h2><i class="fas fa-flag"></i> <span data-i18n="mission-title">Mission</span></h2>
+                <p data-i18n="mission-desc">Provide a user-friendly platform for converting digital storage units accurately.</p>
             </div>
         </div>
     </section>
 
     <section id="about" class="about-section">
-        <h2><i class="fas fa-info-circle"></i> About the Developer</h2>
+        <h2><i class="fas fa-info-circle"></i> <span data-i18n="about-title">About the Developer</span></h2>
         <div class="about-card">
-            <p>Developed by [ِNada- 22510699], a passionate Web Technologies student.</p>
+            <p data-i18n="about-desc">Developed by Nada (22510699), a passionate Web Technologies student.</p>
         </div>
     </section>
 
     <section id="contact" class="contact-section">
-        <h2><i class="fas fa-paper-plane"></i> Contact Us</h2>
+        <h2><i class="fas fa-paper-plane"></i> <span data-i18n="contact-title">Contact Us</span></h2>
         <form id="contact-form" class="contact-form">
             <div class="form-group">
-                <label for="email">Email:</label>
+                <label for="email" data-i18n="contact-email-label">Email:</label>
                 <input type="email" id="email" name="email" required 
-                       class="form-control" placeholder="Enter your email">
+                       class="form-control" data-i18n-placeholder="contact-email-placeholder" placeholder="Enter your email">
             </div>
             <div class="form-group">
-                <label for="phone">Phone:</label>
+                <label for="phone" data-i18n="contact-phone-label">Phone:</label>
                 <input type="tel" id="phone" name="phone" 
-                       class="form-control" placeholder="Enter your phone number">
+                       class="form-control" data-i18n-placeholder="contact-phone-placeholder" placeholder="Enter your phone number">
             </div>
-            <button type="submit" class="btn-submit">
+            <button type="submit" class="btn-submit" data-i18n="contact-submit">
                 <i class="fas fa-paper-plane"></i> Send Message
             </button>
+        </form>
     </section>
 </body>
 </html>
