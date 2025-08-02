@@ -3,7 +3,8 @@ const units = {
   byte: { value: 8, label: 'Byte (B)', labelAr: 'بايت (ب)' },
   kb: { value: 8 * 1024, label: 'Kilobyte (KB)', labelAr: 'كيلوبايت (ك.ب)' },
   mb: { value: 8 * 1024 * 1024, label: 'Megabyte (MB)', labelAr: 'ميغابايت (م.ب)' },
-  gb: { value: 8 * 1024 * 1024 * 1024, label: 'Gigabyte (GB)', labelAr: 'غيغابايت (غ.ب)' }
+  gb: { value: 8 * 1024 * 1024 * 1024, label: 'Gigabyte (GB)', labelAr: 'غيغابايت (غ.ب)' },
+  tb: { value: 8 * 1024 * 1024 * 1024 * 1024, label: 'Terabyte (TB)', labelAr: 'تيرابايت (ت.ب)' }
 };
 
 const translations = {
@@ -50,10 +51,15 @@ const translations = {
       'unit-kb': 'Kilobyte (KB)',
       'unit-mb': 'Megabyte (MB)',
       'unit-gb': 'Gigabyte (GB)',
+      'unit-tb': 'Terabyte (TB)',
       'back-button': 'Back to Home',
       'history-title': 'Conversion History',
       'clear-history': 'Clear History',
-      'no-history': 'No conversions yet'
+      'no-history': 'No conversions yet',
+      'dropdown-label': 'Conversion Options',
+      'option-default': 'Select an Option',
+      'option-common': 'Common Conversions',
+      'option-advanced': 'Advanced Units'
   },
   ar: {
       'title': 'محول وحدات التخزين الرقمي',
@@ -98,15 +104,21 @@ const translations = {
       'unit-kb': 'كيلوبايت (ك.ب)',
       'unit-mb': 'ميغابايت (م.ب)',
       'unit-gb': 'غيغابايت (غ.ب)',
+      'unit-tb': 'تيرابايت (ت.ب)',
       'back-button': 'العودة إلى الرئيسية',
       'history-title': 'سجل التحويلات',
       'clear-history': 'مسح السجل',
-      'no-history': 'لا توجد تحويلات بعد'
+      'no-history': 'لا توجد تحويلات بعد',
+      'dropdown-label': 'خيارات التحويل',
+      'option-default': 'اختر خيارًا',
+      'option-common': 'التحويلات الشائعة',
+      'option-advanced': 'وحدات متقدمة'
   }
 };
 
 let currentLang = 'en';
 let conversionHistory = [];
+let lastScroll = 0;
 
 document.addEventListener("DOMContentLoaded", function () {
   const menuToggle = document.querySelector('.menu-toggle');
@@ -168,6 +180,18 @@ document.addEventListener("DOMContentLoaded", function () {
   if (fromUnit) fromUnit.addEventListener('change', convertStorage);
   if (toUnit) toUnit.addEventListener('change', convertStorage);
 
+  // Sticky header scroll behavior
+  window.addEventListener('scroll', () => {
+      const currentScroll = window.pageYOffset;
+      const header = document.querySelector('.main-header');
+      if (currentScroll > lastScroll && currentScroll > 50) {
+          header.classList.add('hide');
+      } else {
+          header.classList.remove('hide');
+      }
+      lastScroll = currentScroll <= 0 ? 0 : currentScroll;
+  });
+
   // Initialize language
   updateLanguage();
   updateHistory();
@@ -191,7 +215,7 @@ function updateLanguage() {
 
   document.documentElement.lang = currentLang;
   document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
-  document.querySelector('body').style.fontFamily = currentLang === 'ar' ? "'Noto Sans Arabic', sans-serif" : "'Poppins', sans-serif";
+  document.querySelector('body').style.fontFamily = currentLang === 'ar' ? "'Noto Sans Arabic', sans-serif" : "'Poppins', sans-serif'";
   updateUnitLabels();
 }
 
@@ -199,7 +223,7 @@ function updateUnitLabels() {
   const fromUnit = document.getElementById('fromUnit');
   const toUnit = document.getElementById('toUnit');
   if (fromUnit && toUnit) {
-      const options = ['bit', 'byte', 'kb', 'mb', 'gb'];
+      const options = ['bit', 'byte', 'kb', 'mb', 'gb', 'tb'];
       [fromUnit, toUnit].forEach(select => {
           const selectedValue = select.value;
           select.innerHTML = options.map(unit => `
@@ -222,6 +246,7 @@ function validateInput(e) {
   if (e.target.value < 0) {
       e.target.value = 0;
   }
+  e.target.value = convertArabicNumerals(e.target.value); // Convert Arabic numerals on input
 }
 
 function debounce(func, wait) {
@@ -233,17 +258,21 @@ function debounce(func, wait) {
 }
 
 function convertStorage() {
-  const input = parseFloat(document.getElementById('value').value);
+  const inputElement = document.getElementById('value');
+  let input = inputElement.value;
   const from = document.getElementById('fromUnit').value;
   const to = document.getElementById('toUnit').value;
   const resultElement = document.getElementById('result');
+
+  // Convert Arabic numerals to English before parsing
+  input = convertArabicNumerals(input);
 
   if (!input && input !== 0) {
       resultElement.innerHTML = `<span style="color: #666;">${translations[currentLang]['no-history']}</span>`;
       return;
   }
 
-  const result = (input * units[from].value) / units[to].value;
+  const result = (parseFloat(input) * units[from].value) / units[to].value;
   const formattedResult = formatNumber(result);
   const fromLabel = currentLang === 'ar' ? units[from].labelAr : units[from].label;
   const toLabel = currentLang === 'ar' ? units[to].labelAr : units[to].label;
@@ -264,6 +293,24 @@ function convertStorage() {
   });
   if (conversionHistory.length > 10) conversionHistory.pop(); // Limit to 10 entries
   updateHistory();
+}
+
+function applyConversionOption() {
+  const option = document.getElementById('conversion-options').value;
+  const fromUnit = document.getElementById('fromUnit');
+  const toUnit = document.getElementById('toUnit');
+  const valueInput = document.getElementById('value');
+
+  if (option === 'common') {
+      valueInput.value = 1;
+      fromUnit.value = 'mb';
+      toUnit.value = 'gb';
+  } else if (option === 'advanced') {
+      valueInput.value = 1;
+      fromUnit.value = 'gb';
+      toUnit.value = 'tb';
+  }
+  convertStorage();
 }
 
 function formatNumber(num) {
@@ -292,4 +339,13 @@ function updateHistory() {
 function clearHistory() {
   conversionHistory = [];
   updateHistory();
+}
+
+// Function to convert Arabic numerals to English numerals
+function convertArabicNumerals(input) {
+  const arabicNumerals = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
+  return input.split('').map(char => {
+      const index = arabicNumerals.indexOf(char);
+      return index !== -1 ? index : char;
+  }).join('');
 }
