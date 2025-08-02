@@ -8,15 +8,27 @@ const units = {
     gb: { value: 8 * 1024 * 1024 * 1024, label: 'Gigabyte (GB)' }
 };
 
-document.addEventListener('DOMContentLoaded', () => {
-    const menuToggle = document.getElementById('menu-toggle');
-    const navMenu = document.getElementById('nav-menu');
 
+  document.addEventListener("DOMContentLoaded", function () {
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navMenu = document.querySelector('.nav-menu');
+
+    // إغلاق القائمة عند الضغط على أي رابط داخلها
+    document.querySelectorAll('.nav-menu a').forEach(link => {
+      link.addEventListener('click', () => {
+        navMenu.classList.remove('active');
+        menuToggle.classList.remove('active');
+      });
+    });
+
+    // فتح القائمة عند الضغط على الأيقونة
     menuToggle.addEventListener('click', () => {
       navMenu.classList.toggle('active');
       menuToggle.classList.toggle('active');
     });
   });
+
+
 
     // Converter logic
     const swapIcon = document.querySelector('.swap-icon');
