@@ -26,7 +26,6 @@ document.addEventListener("DOMContentLoaded", function () {
         menuToggle.classList.remove('active');
       });
     });
-
     // إغلاق القائمة عند الضغط على أي مكان خارجها
     document.addEventListener('click', function (e) {
       if (
