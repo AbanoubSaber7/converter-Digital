@@ -9,9 +9,15 @@ const units = {
 };
 
 
-  document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function () {
     const menuToggle = document.querySelector('.menu-toggle');
     const navMenu = document.querySelector('.nav-menu');
+
+    // فتح القائمة عند الضغط على الأيقونة
+    menuToggle.addEventListener('click', () => {
+      menuToggle.classList.toggle('active');
+      navMenu.classList.toggle('active');
+    });
 
     // إغلاق القائمة عند الضغط على أي رابط داخلها
     document.querySelectorAll('.nav-menu a').forEach(link => {
@@ -21,13 +27,18 @@ const units = {
       });
     });
 
-    // فتح القائمة عند الضغط على الأيقونة
-    menuToggle.addEventListener('click', () => {
-      navMenu.classList.toggle('active');
-      menuToggle.classList.toggle('active');
+    // إغلاق القائمة عند الضغط على أي مكان خارجها
+    document.addEventListener('click', function (e) {
+      if (
+        navMenu.classList.contains('active') &&
+        !navMenu.contains(e.target) &&
+        !menuToggle.contains(e.target)
+      ) {
+        navMenu.classList.remove('active');
+        menuToggle.classList.remove('active');
+      }
     });
   });
-
 
 
     // Converter logic
