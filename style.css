@@ -21,11 +21,11 @@ body[lang="ar"] {
 }
 
 .language-toggle {
-    margin-left: 1rem;
+    margin-left: 1.5rem; /* زيادة التباعد الأفقي */
 }
 
 .language-toggle button {
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 1.2rem; /* زيادة حجم الزر لتحسين الظهور */
     background: #3498db;
     color: white;
     border: none;
@@ -179,7 +179,7 @@ body[lang="ar"] .back-button:hover i {
 .logo-container {
     display: flex;
     align-items: center;
-    gap: 1.5rem; /* Increased gap for better spacing */
+    gap: 2rem; /* زيادة التباعد بين الشعار وزرد اللغة */
 }
 
 .logo {
@@ -365,7 +365,7 @@ label {
 
     .language-toggle {
         margin-left: 0;
-        margin-top: 0.5rem;
+        margin-top: 1rem; /* زيادة التباعد العمودي على الأجهزة الصغيرة */
     }
 
     .logo h1 {
@@ -525,7 +525,7 @@ label {
 
     .language-toggle {
         margin-left: 0;
-        margin-top: 0.5rem;
+        margin-top: 1rem;
     }
 
     .nav-menu {
@@ -564,7 +564,7 @@ label {
 .nav-menu ul {
     list-style: none;
     display: flex;
-    gap: 0.5rem; /* Adjusted gap for better spacing */
+    gap: 0.75rem; /* زيادة التباعد بين عناصر القائمة */
     margin: 0;
     padding: 0;
     background: var(--primary-color);
