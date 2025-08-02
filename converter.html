@@ -3,42 +3,61 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Digital Storage Converter</title>
+  <title data-i18n="title">Digital Storage Converter</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Noto+Sans+Arabic:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
+  <script src="scrapt.js" defer></script>
 </head>
 <body>
   <header class="main-header">
     <div class="logo-container">
       <div class="logo">
         <i class="fas fa-hdd logo-icon"></i>
-        <h1>Digital Storage Converter</h1>
+        <h1 data-i18n="header-title">Digital Storage Converter</h1>
+      </div>
+      <div class="language-toggle">
+        <button id="lang-toggle" data-i18n="lang-toggle">العربية</button>
       </div>
     </div>
+    <div class="menu-toggle" id="menu-toggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <nav class="nav-menu" id="nav-menu">
+      <ul>
+        <li><a href="index.html" data-i18n="nav-home">Home</a></li>
+        <li><a href="index.html#features" data-i18n="nav-features">Features</a></li>
+        <li><a href="index.html#converter" data-i18n="nav-converter">Converter</a></li>
+        <li><a href="index.html#vision-mission" data-i18n="nav-vision-mission">Vision & Mission</a></li>
+        <li><a href="index.html#about" data-i18n="nav-about">About</a></li>
+        <li><a href="index.html#contact" data-i18n="nav-contact">Contact</a></li>
+      </ul>
+    </nav>  
   </header>
   <div class="container">
     <section class="converter-card">
       <div class="card-header">
         <i class="fas fa-exchange-alt header-icon"></i>
-        <h2>Digital Storage Units Converter</h2>
+        <h2 data-i18n="converter-title">Digital Storage Units Converter</h2>
       </div>
       
       <div class="converter-form">
         <div class="input-group">
-          <label for="value">Value</label>
-          <input type="number" id="value" placeholder="Enter value" class="form-control" />
+          <label for="value" data-i18n="converter-value-label">Value</label>
+          <input type="number" id="value" data-i18n-placeholder="converter-value-placeholder" placeholder="Enter value" class="form-control" />
         </div>
 
         <div class="units-group">
           <div class="select-group">
-            <label for="fromUnit">From</label>
+            <label for="fromUnit" data-i18n="converter-from-label">From</label>
             <select id="fromUnit" class="form-control">
-              <option value="bit">Bit (b)</option>
-              <option value="byte" selected>Byte (B)</option>
-              <option value="kb">Kilobyte (KB)</option>
-              <option value="mb">Megabyte (MB)</option>
-              <option value="gb">Gigabyte (GB)</option>
+              <option value="bit" data-i18n="unit-bit">Bit (b)</option>
+              <option value="byte" selected data-i18n="unit-byte">Byte (B)</option>
+              <option value="kb" data-i18n="unit-kb">Kilobyte (KB)</option>
+              <option value="mb" data-i18n="unit-mb">Megabyte (MB)</option>
+              <option value="gb" data-i18n="unit-gb">Gigabyte (GB)</option>
             </select>
           </div>
 
@@ -47,18 +66,18 @@
           </div>
 
           <div class="select-group">
-            <label for="toUnit">To</label>
+            <label for="toUnit" data-i18n="converter-to-label">To</label>
             <select id="toUnit" class="form-control">
-              <option value="bit" selected>Bit (b)</option>
-              <option value="byte">Byte (B)</option>
-              <option value="kb">Kilobyte (KB)</option>
-              <option value="mb">Megabyte (MB)</option>
-              <option value="gb">Gigabyte (GB)</option>
+              <option value="bit" selected data-i18n="unit-bit">Bit (b)</option>
+              <option value="byte" data-i18n="unit-byte">Byte (B)</option>
+              <option value="kb" data-i18n="unit-kb">Kilobyte (KB)</option>
+              <option value="mb" data-i18n="unit-mb">Megabyte (MB)</option>
+              <option value="gb" data-i18n="unit-gb">Gigabyte (GB)</option>
             </select>
           </div>
         </div>
 
-        <button onclick="convertStorage()" class="convert-btn">
+        <button onclick="convertStorage()" class="convert-btn" data-i18n="converter-button">
           <i class="fas fa-calculator"></i> Convert
         </button>
 
@@ -66,14 +85,28 @@
           <p id="result" class="result-text"></p>
         </div>
       </div>
+
+      <div class="dropdown-container">
+        <label for="conversion-options" data-i18n="dropdown-label">Conversion Options</label>
+        <select id="conversion-options" class="form-control" onchange="applyConversionOption()">
+          <option value="default" data-i18n="option-default">Select an Option</option>
+          <option value="common" data-i18n="option-common">Common Conversions</option>
+          <option value="advanced" data-i18n="option-advanced">Advanced Units</option>
+        </select>
+      </div>
+
+      <div class="history-container">
+        <h3 data-i18n="history-title">Conversion History</h3>
+        <button id="clear-history" class="clear-history-btn" data-i18n="clear-history">Clear History</button>
+        <ul id="history-list" class="history-list"></ul>
+      </div>
     </section>
   </div>
   <nav class="nav-back">
-    <a href="index.html" class="back-button">
+    <a href="index.html" class="back-button" data-i18n="back-button">
       <i class="fas fa-arrow-left"></i>
       <span>Back to Home</span>
     </a>
   </nav>
-  <script src="scrapt.js"></script>
 </body>
 </html>
